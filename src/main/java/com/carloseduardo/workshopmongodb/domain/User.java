@@ -1,28 +1,33 @@
 package com.carloseduardo.workshopmongodb.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document(collection="user")
 public class User implements Serializable {
 
-    private Long id;
+    @Id
+    private String id;
     private String name;
     private String email;
 
     public User(){
     }
 
-    public User(Long id, String name, String email) {
+    public User(String id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

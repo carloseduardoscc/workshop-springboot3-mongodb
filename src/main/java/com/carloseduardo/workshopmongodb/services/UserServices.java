@@ -33,4 +33,11 @@ public class UserServices {
         return new User(null, userDTO.getName(), userDTO.getEmail());
     }
 
+    public void delete (String id){
+        if (!repo.existsById(id)){
+            throw new ObjectNotFoundException("Objeto não encontrado");
+        }
+        repo.deleteById(id);
+    }
+
 }

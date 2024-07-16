@@ -23,19 +23,15 @@ public class UserResource {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UserDTO>> findAll() {
-
         List<User> userList = service.findAll();
         List<UserDTO> userDTOList = userList.stream().map(UserDTO::new).toList();
         return ResponseEntity.ok(userDTOList);
-
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
-
         User user = service.findById(id);
         return ResponseEntity.ok(new UserDTO(user));
-
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -43,6 +39,12 @@ public class UserResource {
         User insertedUser = service.insert(user);
         URI insertedUserURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(insertedUser.getId()).toUri();
         return ResponseEntity.created(insertedUserURI).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

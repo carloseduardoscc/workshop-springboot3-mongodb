@@ -15,27 +15,27 @@ public class PostServices {
     @Autowired
     private PostRepository repo;
 
-    public List<Post> findAll(){
+    public List<Post> findAll() {
         return repo.findAll();
     }
 
-    public Post findById(String id){
+    public Post findById(String id) {
         Optional<Post> opt = repo.findById(id);
         return opt.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
-    public Post insert (Post post){
+    public Post insert(Post post) {
         return repo.insert(post);
     }
 
-    public void delete (String id){
-        if (!repo.existsById(id)){
+    public void delete(String id) {
+        if (!repo.existsById(id)) {
             throw new ObjectNotFoundException("Objeto não encontrado");
         }
         repo.deleteById(id);
     }
 
-    public void update(Post postData, String id){
+    public void update(Post postData, String id) {
         Post post = repo.findById(id).orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
         updateData(post, postData);
         repo.save(post);
@@ -46,6 +46,10 @@ public class PostServices {
         post.setBody(postData.getBody());
         post.setAuthor(postData.getAuthor());
         post.setDate(postData.getDate());
+    }
+
+    public List<Post> findByTitle(String text){
+        return repo.findByTitleContainingIgnoreCase(text);
     }
 
 }

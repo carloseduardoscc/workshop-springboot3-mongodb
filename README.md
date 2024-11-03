@@ -37,7 +37,7 @@ Este projeto é uma API para gerenciamento de uma rede social. Ele permite a cri
    ```bash
    git clone https://github.com/seu-usuario/nome-do-repositorio.git
 
-## Endpoint da API
+## Endpoints da API
 
 ---
 
